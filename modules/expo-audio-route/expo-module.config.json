@@ -4,6 +4,6 @@
     "modules": ["ExpoAudioRouteModule"]
   },
   "android": {
-    "modules": ["expo.modules.audioroute.ExpoAudioRouteModule"]
+    "modules": ["expo.modules.audioRoute.ExpoAudioRouteModule"]
   }
 }

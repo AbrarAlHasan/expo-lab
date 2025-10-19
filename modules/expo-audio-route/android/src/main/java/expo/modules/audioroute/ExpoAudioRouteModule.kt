@@ -1,8 +1,8 @@
-package expo.module.audioroute
-
+package expo.modules.audioRoute
 
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+
 import android.content.Context
 import android.media.AudioManager
 import android.media.AudioDeviceInfo
@@ -13,14 +13,15 @@ class ExpoAudioRouteModule : Module() {
     private var audioManager: AudioManager? = null
     private var deviceCallback: AudioDeviceCallback? = null
 
-    override func definition():ModuleDefinition
-    {
+    override fun definition() = ModuleDefinition {
         Name("ExpoAudioRoute")
-        Events("OnAudioRouteChange")
+        Events("onAudioRouteChange")
 
-        onCreate {
-            audioManger = appContext.reactContext?.getSystemService(Context.AUDIO_SERVICE) as? AudioManager
+
+        OnCreate {
+            audioManager = appContext.reactContext?.getSystemService(Context.AUDIO_SERVICE) as? AudioManager
         }
+
         AsyncFunction("getCurrentRouteAsync") {
             currentRoute()
         }
@@ -56,8 +57,9 @@ class ExpoAudioRouteModule : Module() {
         deviceCallback = null
     }
 
+
     private fun currentRoute(): String {
-        val am = audioManager ?: return 'unknown'
+        val am = audioManager ?: return "unknown"
         val outputs = am.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
 
         //Check in Priority order: wired > bluetooth >speaker
